@@ -1,0 +1,25 @@
+{
+  "name": "backend-quiz3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laophan74/backend-quiz3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laophan74/backend-quiz3/issues"
+  },
+  "homepage": "https://github.com/laophan74/backend-quiz3#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}

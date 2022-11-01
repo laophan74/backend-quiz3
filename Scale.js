@@ -11,7 +11,7 @@ class Scale {
   }
 
   isHeavier(index, isHeavier) {
-    console.log('Fake coin: ', index, ', isHeavier: ', isHeavier);
+    return [index, isHeavier];
   }
 }
 
