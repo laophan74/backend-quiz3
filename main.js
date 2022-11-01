@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const _ = require('lodash');
 const Scale = require('./Scale');
 
@@ -85,6 +86,6 @@ function check(index, randomCoin) {
   }
   return 'Xu thật';
 }
-console.log(check(12, [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]));
+console.log(check(12, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]));
 // check();
 module.exports = check;
