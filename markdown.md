@@ -458,7 +458,7 @@ _.xor([2, 1, 4, 5], [2, 3, 4], [2, 3]);
 
 * *Cú pháp:* `_.forEach(collection, [iteratee=_.identity])`  
 
-* *Tác dụng:* Duyệt từng phần tử từ trái sang phải và xử lí thuật toán.  
+* *Tác dụng:* Duyệt từng phần tử từ trái sang phải và xử lí thuật toán, phù hợp với mảng.  
 
 * *So sánh với built-in function:* Giống với Map.prototype.forEach().  
 
@@ -476,28 +476,11 @@ _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
 // => Logs 'a' then 'b' (iteration order is not guaranteed).
 ```  
 
-### _.forEachRight
-
-* *Cú pháp:* `_.forEachRight(collection, [iteratee=_.identity])`  
-
-* *Tác dụng:* Duyệt từng phần tử từ phải sang trái và xử lí thuật toán.  
-
-* *So sánh với built-in function:* Không có function này.  
-
-* *Ví dụ:*  
-
-```javascript
-_.forEachRight([1, 2], function(value) {
-  console.log(value);
-});
-// => Logs `2` then `1`.
-```  
-
 ### _.find
 
 * *Cú pháp:* `_.find(collection, [predicate=_.identity], [fromIndex=0])`  
 
-* *Tác dụng:* Tìm phần tử theo điều kiện.  
+* *Tác dụng:* Trả về phần tử theo điều kiện, nhưng chỉ trả về phần tử đầu tiên phù hợp với điều kiện.  
 
 * *So sánh với built-in function:* Array.prototype.find() chỉ dùng được đối với mảng, không có hàm find dành cho Object.  
 
@@ -524,4 +507,137 @@ _.find(users, ['active', false]);
 // The `_.property` iteratee shorthand.
 _.find(users, 'active');
 // => object for 'barney'
+```  
+
+### _.filter
+
+* *Cú pháp:* `_.filter(collection, [predicate=_.identity])`  
+
+* *Tác dụng:* Trả về mảng chứa các phần tử theo điều kiện, nhưng trả về tất cả phần tử phù hợp với điều kiện.  
+
+* *So sánh với built-in function:* Giống với Array.prototype.filter().  
+
+* *Ví dụ:*  
+
+```javascript
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+ 
+_.filter(users, function(o) { return o.age < 50; });
+// => objects for ['fred'] and ['barney']
+ 
+// The `_.matches` iteratee shorthand.
+_.filter(users, { 'age': 36, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.filter(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+_.filter(users, 'active');
+// => objects for ['barney']
+```  
+
+### _.reject
+
+* *Cú pháp:* `_.reject(collection, [predicate=_.identity])`  
+
+* *Tác dụng:* Function này ngược lại hoàn toàn so với filter, trả về mảng chứa các phần tử không giống với điều kiện.  
+
+* *So sánh với built-in function:* Không có function này.  
+
+* *Ví dụ:*  
+
+```javascript
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 40, 'active': true }
+];
+ 
+_.reject(users, function(o) { return !o.active; });
+// => objects for ['fred']
+ 
+// The `_.matches` iteratee shorthand.
+_.reject(users, { 'age': 40, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.reject(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+_.reject(users, 'active');
+// => objects for ['barney']
+```  
+
+### _.map
+
+* *Cú pháp:* `_.map(collection, [iteratee=_.identity])`  
+
+* *Tác dụng:* Tạo một mảng giá trị bằng cách chạy từng phần tử trong collection, mảng trả về dựa vào điều kiện.  
+
+* *So sánh với built-in function:* Array.prototype.map() không thể xử lý nhiều điều kiện trong 1 function.  
+
+* *Ví dụ:*  
+
+```javascript
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': true },
+  { 'user': 'fred',    'age': 40, 'active': false },
+  { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+ 
+_.map(users, function(o) { return o.age; });
+// => [36, 40, 1]
+
+```  
+
+### _.orderBy
+
+* *Cú pháp:* `_.orderBy(collection, [iteratees=[_.identity]], [orders])`  
+
+* *Tác dụng:* Sắp xếp các phần tử được chỉ định, có thể sắp xếp lớn bé đều được còn sortBy thì không.  
+
+* *So sánh với built-in function:* Không có function này.  
+
+* *Ví dụ:*  
+
+```javascript
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 34 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 36 }
+];
+ 
+// Sort by `user` in ascending order and by `age` in descending order.
+_.orderBy(users, ['user', 'age'], ['asc', 'desc']);
+// => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+```  
+
+## Object
+
+### _.forIn
+
+* *Cú pháp:* `_.forIn(object, [iteratee=_.identity])`  
+
+* *Tác dụng:* Duyệt từng phần tử từ trái sang phải và xử lí thuật toán, phù hợp với Object.  
+
+* *So sánh với built-in function:* Không có function này.  
+
+* *Ví dụ:*  
+
+```javascript
+var users = {
+  name: 'Hoang',
+  age: 35,
+  gender: 'male'
+}
+_.forInt(users, (value, key) => {
+    console.log(value)
+  })
+// => 'Hoang', '35', 'male'
 ```  
