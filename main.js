@@ -86,6 +86,10 @@ function check(index, randomCoin) {
   }
   return 'Xu thật';
 }
-console.log(check(12, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]));
-// check();
-module.exports = check;
+// console.log(check(12, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]));
+function weight(left, right){
+  const w = new Scale();
+  return w.weight(left, right);
+}
+module.exports = {check, weight};
+
